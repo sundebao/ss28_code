@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+		<style>
+		*{margin:0px;padding:0px;}
+		#box{
+			width:200px;
+			height:150px;
+			margin:17px;
+			padding-left:12px;
+			padding-right:13px; 
+			border:20px solid green;
+			position:absolute;
+			left:134px;
+			top:57px;
+			overflow:scroll;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="son"></div>
+	</div>
+</body>
+<script>
+	box = document.getElementById('box');
+	alert(box.offsetWidth);
+</script>
+</html>

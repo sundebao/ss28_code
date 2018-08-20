@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0px;padding:0px;}
+		#left{position:fixed;left:60px;top:120px;width:30px;height:30px;}
+		#right{position:fixed;left:370px;top:120px;width:30px;height:30px;}
+		.div1{width:30px;height:30px;position:fixed;left:100px;top:250px;background:yellow;border-radius:30px;text-align:center;line-height:30px;}
+	</style>
+</head>
+<body>
+	<div id="left" onclick="func('-')">
+		<img src="./images/left.png" alt="" width="100%">
+	</div>
+	<img src="./images/11.jpg" alt="" name="list" style="display:block">
+	<img src="./images/22.jpg" alt="" name="list" style="display:none;">
+	<img src="./images/33.jpg" alt="" name="list" style="display:none;">
+	<img src="./images/44.jpg" alt="" name="list" style="display:none;">
+	<img src="./images/55.jpg" alt="" name="list" style="display:none;">
+	<div id="right" onclick="func('+')">
+	<img src="./images/right.png" alt="" width="100%">
+	</div>
+	<div class="div1" style="background:pink;"name="list1" onmouseover="demo(0)" onmouseout="demo1(0)"></div>
+	<div class="div1" name="list1" onmouseover="demo(1)" onmouseout="demo1(1)"></div>
+	<div class="div1" name="list1" onmouseover="demo(2)" onmouseout="demo1(2)"></div>
+	<div class="div1" name="list1" onmouseover="demo(3)" onmouseout="demo1(3)"></div>
+	<div class="div1" name="list1" onmouseover="demo(4)" onmouseout="demo1(4)"></div>
+</body>
+<script>
+	lists = document.getElementById('list');
+	list1 = document.getElementById('list1');
+	var x = 100;
+	var m =0;
+	var timmer;
+	for(i=0;i<list1.length;i++){
+		list[i].style.left=x+'px';
+		list1[i].innerHTML = i+1;
+		x+=50;
+	} 
+	function demo(a){
+		clearInterval(timmer);
+		for(i=0;i<list1.length;i++){
+			if(a==i){
+				lists[a].style.display="block";
+				list1[i].style.backgroundColor="pink";
+			}else{
+				lists[i].style.display = "none";
+				list1[i].style.backgroundColor="yellow";
+			}
+		}
+	}
+	function demo1(b){
+		m=--b;
+		running();
+		timmer = setInterval(running,2000);
+	}
+	function show(m){
+		for(i=0;i<lists.length;i++){
+			if(i==m){
+				lists[i].style.display="block";
+				list1[i].style.backgroundColor="pink";
+			}else{
+				lists[i].style.display="none";
+				list[i].style.backgroundColor="yellow";
+			}
+		}
+	}
+	function running(){
+		m++;
+		if(m>=lists.length){
+			m=0;
+		}
+		show(m);
+	}
+	function func(b){
+		clearInterval(timmer);
+		switch(b){
+			case '-':
+				m=m-2;
+				if(m<-1){
+					m=(lists.length-2)
+			}
+				break;
+			case '+'
+				break;
+		}
+		running();
+		timmer = setInterval(running,3000);
+	}
+	timmer = setInterval(running,1000);
+</script>
+</html>
