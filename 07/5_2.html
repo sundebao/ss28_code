@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		#big{
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			left: 320px;
+			top: 10px;
+			overflow: hidden;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<img src="./1.jpg" id="small" width="187">
+	<div id="big">
+		<img src="./1.jpg">
+	</div>
+</body>
+<script>
+	var big = document.getElementById('big');
+
+	var small = document.getElementById('small');
+
+	small.onmousemove = function(e){
+		var e = e || event;
+		document.title = 'X:'+e.clientX+'Y:'+e.clientY;
+
+		big.scrollLeft = e.clientX * 4 -100;
+		big.scrollTop = e.clientY * 4 -100;
+		big.style.display = 'block';
+	}
+
+	small.onmouseout = function(){
+		big.style.display = 'none';
+	}
+</script>
+</html>

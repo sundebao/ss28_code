@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		#parent{
+			width: 400px;
+			height: 400px;
+			background: red;
+		}
+		#son{
+			width: 200px;
+			height: 200px;
+			background: pink;
+		}
+	</style>
+</head>
+<body>
+	<div id="parent">
+		<div id="son"></div>
+	</div>
+</body>
+<script>
+	var parent = document.getElementById('parent');
+
+	var son = document.getElementById('son');
+
+	son.onclick = function(e){
+		var e = e||event;
+		alert('点击了小的div');
+		// e.stopPropagation();
+		e.cancelBubble = true;  
+	}
+
+	parent.onclick = function(){
+		alert('点击了大的div');
+	}
+</script>
+</html>

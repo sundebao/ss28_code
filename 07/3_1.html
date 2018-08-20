@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		#box{
+			width: 100px;
+			height: 100px;
+			background: pink;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script>
+	var box = document.getElementById('box');
+	// alert(box.style.width);
+	//获取计算后的样式 标准浏览器获取
+	// var css = document.defaultView.getComputedStyle(box);
+	// alert(css.height);
+	//IE支持获取的方式
+	// var css = box.currentStyle;
+	// alert(css.height);
+	
+	//根据不同的浏览器进行计算后样式的获取
+	if(box.currentStyle){
+		//IE浏览器
+		var css = box.currentStyle;
+	}else{
+		//标准浏览器
+		var css = document.defaultView.getComputedStyle(box);
+	}
+	alert(css.backgroundColor);
+</script>
+</html>

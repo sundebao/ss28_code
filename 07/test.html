@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		#left{
+			width: 30px;
+			height: 30px;
+			position: fixed;
+			left: 30px;
+			top: 150px;
+			cursor: pointer;
+		}
+		#right{
+			width: 30px;
+			height: 30px;
+			position: fixed;
+			left: 630px;
+			top: 150px;
+			cursor: pointer;
+		}
+		.div1{
+			width: 20px;
+			height: 20px;
+			background: yellow;
+			position: fixed;
+			top: 280px;
+			left: 30px;
+			border-radius: 20px;
+			text-align: center;
+			line-height: 20px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="left" onclick="func(['-'])">
+		<img src="./images/left.png" width="100%">
+	</div>
+	<img src="./images/aa.jpg" id="img">
+	<div id="right" onclick="func('+')">
+		<img src="./images/right.png" width="100%">
+	</div>
+
+	<div class="div1" onmouseover="demo(0)" onmouseout="demo1(0)" style="background:pink"></div>
+	<div class="div1" onmouseover="demo(1)" onmouseout="demo1(1)"></div>
+	<div class="div1" onmouseover="demo(2)" onmouseout="demo1(2)"></div>
+	<div class="div1" onmouseover="demo(3)" onmouseout="demo1(3)"></div>
+	<div class="div1" onmouseover="demo(4)" onmouseout="demo1(4)"></div>
+	<div class="div1" onmouseover="demo(5)" onmouseout="demo1(5)"></div>
+</body>
+<script>
+	var img = document.getElementById('img');
+	var div1s = document.getElementsByClassName('div1');
+	// console.log(div1s);
+	var num = 0;
+	var timmer;
+	var x = 30;
+	var arr=['aa.jpg','bb.jpg','cc.jpg','dd.jpg','ee.jpg','ff.jpg'];
+
+	for(var i = 0;i < div1s.length;i++){
+		div1s[i].style.left =x+'px';
+		div1s[i].innerHTML = i+1;
+		x += 30;
+	}
+
+	function demo(a){
+		clearInterval(timmer);
+
+		for(var i = 0; i < arr.length; i++){
+			if( a == i){
+				img.src = './images/'+arr[i];
+
+				div1s[i].style.background = 'pink';
+			}else{
+				div1s[i].style.background = "yellow";
+			}
+		}
+	}
+
+
+	function demo1(b){
+		num = b;
+		running();
+
+		timmer = setInterval(running,1000);
+	}
+
+	function func(b){
+		clearInterval(timmer);
+		switch(b){
+			case '-':
+				num --;
+				if(num < 0 ){
+					num  = arr.length-1;
+				}
+				break;
+			case '+':
+				break;	
+		}
+		running();
+
+		timmer = setInterval(running,1000);
+	}
+
+	timmer = setInterval(running,1000);
+
+	function running(){
+		
+		// console.log(arr[num]);
+		img.src = './images/'+arr[num]; 
+		show(num);
+		num++;
+		if(num == arr.length){
+			num = 0;
+		}
+	}
+
+	function show(num){
+		for(var i = 0;i < div1s.length;i++){
+			if(num == i){
+				div1s[i].style.background = 'pink';
+			}else{
+				div1s[i].style.background = 'yellow';
+			}
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		#left{
+			width: 30px;
+			height: 30px;
+			position: fixed;
+			left: 270px;
+			top: 120px;
+			cursor: pointer;
+		}
+		#right{
+			width: 30px;
+			height: 30px;
+			position: fixed;
+			left: 980px;
+			top: 120px;
+			cursor: pointer;
+		}
+		.div1{
+			width: 20px;
+			height: 20px;
+			position: fixed;
+			left: 290px;
+			top: 280px;
+			background: yellow;
+			border-radius: 20px;
+			text-align: center;
+			line-height: 20px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<center>
+		<div id="left" onclick="func('-')">
+			<img src='./images/left.png' width="100%">
+		</div>
+		<img src="./images/aa.jpg" name="list" style="display:block">
+		<img src="./images/bb.jpg" name="list" style="display:none">
+		<img src="./images/cc.jpg" name="list" style="display:none">
+		<img src="./images/dd.jpg" name="list" style="display:none">
+		<img src="./images/ee.jpg" name="list" style="display:none">
+		<img src="./images/ff.jpg" name="list" style="display:none">
+		<div id="right" onclick="func('+')">
+			<img src="./images/right.png" width="100%">
+		</div>
+
+		<div class="div1" style="background:pink" name="list1" onmouseover="demo(0)" onmouseout="demo1(0)"></div>
+		<div class="div1" name="list1" onmouseover="demo(1)" onmouseout="demo1(1)"></div>
+		<div class="div1" name="list1" onmouseover="demo(2)" onmouseout="demo1(2)"></div>
+		<div class="div1" name="list1" onmouseover="demo(3)" onmouseout="demo1(3)"></div>
+		<div class="div1" name="list1" onmouseover="demo(4)" onmouseout="demo1(4)"></div>
+		<div class="div1" name="list1" onmouseover="demo(5)" onmouseout="demo1(5)"></div>
+			
+		</div>
+	</center>
+</body>
+<script>
+	//通过name属性获取对象
+	var lists = document.getElementsByName('list');
+	var list1s = document.getElementsByName('list1');
+	// console.log(lists);
+	var timmer;
+	var m = 0;
+	var x =290;
+
+	//让每个数字按钮都显示出来
+	for(var i = 0;i<list1s.length;i++){
+		//每个按钮之间都有间隔
+		list1s[i].style.left = x+'px';
+		//显示按钮里面的数字
+		list1s[i].innerHTML = i+1;
+		x += 30;
+	}
+
+	//鼠标移入到数字按钮上,让图片改变
+	function demo(a){
+		//先清除掉定时器
+		clearInterval(timmer);
+		for(var i = 0;i<list1s.length;i++){
+			//判断鼠标移上去的数字是否与某个图片下标相等
+			if(a == i){
+				//相等就让他显示出来
+				lists[i].style.display = "block";
+				//顺便改变一下按钮的背景颜色
+				list1s[i].style.backgroundColor='pink';
+			}else{
+				//不是这个图片
+				lists[i].style.display  ="none";
+				//而且要将其他的按钮恢复原色
+				list1s[i].style.backgroundColor = "yellow";
+			}
+		}
+	}
+
+	//当鼠标从数字按钮上离开的时候
+	function demo1(b){
+		//这里需要将b--,因为下面我们要调用running方法
+		m = --b;
+
+		running();
+
+		//再重新启动定时器
+		timmer = setInterval(running,1000);
+	}
+
+	//展示图片的哈数
+	function show(m){
+		for(var i =0;i<lists.length;i++){
+			if(i == m){
+				//显示传入的图片
+				lists[i].style.display = "block";
+				//让你的数字按钮的背景颜色改变
+				list1s[i].style.backgroundColor="pink";
+			}else{
+				//隐藏其他图片
+				lists[i].style.display = 'none';
+				//让你的数字按钮背景颜色恢复到原色
+				list1s[i].style.backgroundColor="yellow";
+			}
+		}
+	}
+
+	//图片滚动的函数
+	function running(){
+		//m自己加
+		m++;
+		//判断到最后一张图片,需要让他从头开始
+		if(m >= lists.length){
+			m = 0;
+		}
+
+		//调用展示图片的函数,传入下标值
+		show(m);
+	}
+
+	//点击按钮改变图片滚动
+	function func(b){
+		//鼠标点击按钮让图片停止滚动
+		clearInterval(timmer);
+		switch(b){
+			case '-':
+				//此时的m是当前图片下标
+				//-2是为了调用running方法,让图片回到上一个
+				m = m - 2;
+				//当点到m小于-1时,让他回到最后一张图片
+				if(m < -1){
+					m = (lists.length-2);
+				}
+				break;
+			case '+':
+				break;	
+		}
+
+		//调用函数让图片继续滚动
+		running();
+
+		//这里需要重新调用定时器
+		timmer = setInterval(running,1000);
+	}
+	//调用定时器
+	timmer = setInterval(running,1000);
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<select onchange="func(this)">
+		<option value="">--请选择--</option>
+		<option value="0">浙江</option>
+		<option value="1">广东</option>
+		<option value="2">江苏</option>
+		<option value="3">河南</option>
+		<option value="4">北京</option>
+		<option value="5">安徽</option>
+	</select>省
+	<select id="cid">
+		<option value="">--请选择--</option>
+	</select>市
+</body>
+<script>
+	function func(obj){
+		// alert(obj.value);
+		var cid = document.getElementById('cid');
+		value = obj.value;
+		//根据我们传递过来的value值来分配二级数据
+		city = [];
+		city[0] = ['宁波','杭州','温州','嘉兴','绍兴','金华'];
+		city[1] = ['广州','东莞','深圳','惠州','潮州','佛山'];
+		city[2] = ['南京','苏州','连云港','南通'];
+		city[3] = ['郑州','平顶山','商丘','洛阳'];
+		city[4] = ['朝阳','海淀','昌平','东城','西城'];
+		city[5] = ['合肥','安庆','芜湖','黄山','宣城'];
+
+		//固定长度 也就是清空原来的内容
+		cid.length = 0;
+
+		//创建option标签并写入
+		for(var i = 0;i<city[value].length;i++){
+			op = new Option(city[value][i],i);
+			// console.log(op);
+			cid.add(op);
+		}
+	}
+</script>
+</html>

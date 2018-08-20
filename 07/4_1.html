@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		#box{
+			width: 200px;
+			height: 150px;
+			margin: 17px;
+			padding-top: 11px;
+			padding-bottom: 12px;
+			padding-left: 13px;
+			padding-right: 14px;
+			border: 20px solid green;
+			position: absolute;
+			left: 134px;
+			top: 57px;
+			overflow: scroll;
+		}
+		#son{
+			width: 10000px;
+			height: 10000px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="son"></div>
+	</div>
+</body>
+<script>
+	var box = document.getElementById('box');
+
+	//alert(box.offsetWidth);//267
+	//alert(box.offsetHeight);//213
+	// alert(box.offsetLeft);//151
+	// alert(box.offsetTop);//74
+	
+	// alert(box.clientWidth);//227
+	// alert(box.clientHeight);//173
+	// alert(box.clientLeft);//20
+	// alert(box.clientTop);//20
+	
+	// alert(box.scrollWidth);//10013
+	// alert(box.scrollHeight);//10023
+	 box.scrollLeft = 7000;
+	 box.scrollTop  =3000;
+	 // alert(box.scrollLeft);
+	 // alert(box.scrollTop);
+</script>
+</html>

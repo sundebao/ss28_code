@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		#left{
+			width: 30px;
+			height: 30px;
+			position: fixed;
+			cursor: pointer;
+			left: 20px;
+			top: 150px;
+		}
+		#right{
+			width: 30px;
+			height: 30px;
+			position: fixed;
+			cursor: pointer;
+			left: 690px;
+			top: 150px;
+		}
+		.div1{
+			width: 20px;
+			height: 20px;
+			position: fixed;
+			left: 20px;
+			top: 280px;
+			background: yellow;
+			border-radius: 20px;
+			text-align: center;
+			line-height: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="left" onclick="func('-')">
+		<img src="./images/left.png" width="100%">
+	</div>
+	<img src="./images/aa.jpg" name="list" style="display:block">
+	<img src="./images/bb.jpg" name="list" style="display:none">
+	<img src="./images/cc.jpg" name="list" style="display:none">
+	<img src="./images/dd.jpg" name="list" style="display:none">
+	<img src="./images/ee.jpg" name="list" style="display:none">
+	<img src="./images/ff.jpg" name="list" style="display:none">
+	<div id="right" onclick="func('+')">
+		<img src="./images/right.png" width="100%">
+	</div>
+	<div class="div1" name="list1" onmouseover="demo(0)" onmouseout="demo1(0)" style="background: pink"></div>
+	<div class="div1" name="list1" onmouseover="demo(1)" onmouseout="demo1(1)"></div>
+	<div class="div1" name="list1" onmouseover="demo(2)" onmouseout="demo1(2)"></div>
+	<div class="div1" name="list1" onmouseover="demo(3)" onmouseout="demo1(3)"></div>
+	<div class="div1" name="list1" onmouseover="demo(4)" onmouseout="demo1(4)"></div>
+	<div class="div1" name="list1" onmouseover="demo(5)" onmouseout="demo1(5)"></div>
+</body>
+<script>
+	var lists = document.getElementsByName('list');
+	var list1 = document.getElementsByName('list1');
+	var timmer;
+	var m = 0;
+	var x = 20;
+
+	//显示数字按钮
+	for(var i = 0;i < list1.length;i++){
+		list1[i].style.left = x+'px';
+		list1[i].innerHTML = i+1;
+		x += 30;
+	}
+
+	//鼠标移入到数字按钮
+	function demo(a){
+		clearInterval(timmer);
+
+		for(var i = 0;i<list1.length;i++){
+			if(a == i){
+				lists[i].style.display = "block";
+
+				list1[i].style.background = "pink";
+			}else{
+				lists[i].style.display = "none";
+
+				list1[i].style.background = "yellow";
+			}
+		}
+	}
+
+	//鼠标移除数字按钮
+	function demo1(b){
+		m = --b;
+
+		running();
+
+		timmer = setInterval(running,1000);
+	}
+	//显示图片的方法
+	function show(m){
+		for(var i = 0;i<lists.length;i++){
+			if(i == m){
+				lists[i].style.display = "block";
+				list1[i].style.background  = 'pink';
+			}else{
+				lists[i].style.display = "none";
+
+				list1[i].style.background = 'yellow';
+			}
+		}
+	}
+
+	//图片滚动的方法
+	function running(){
+		m++;
+		if(m >= lists.length){
+			m = 0;
+		}
+
+		show(m);
+	}
+
+	function func(b){
+		clearInterval(timmer);
+
+		switch(b){
+			case '-':
+				m = m -2;
+				if(m < -1){
+					m = (lists.length-2);
+				}
+				break;
+			case '+':
+				break;	
+		}
+
+		running();
+
+		timmer = setInterval(running,1000);
+	}
+
+	timmer = setInterval(running,1000);
+</script>
+</html>
