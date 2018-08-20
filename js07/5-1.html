@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			*{margin:0px;padding:0px;}
+			#big{width:200px;height:200px;position:absolute;left:520px;top:10px;overflow:hidden;display:none;}
+		</style>
+	</head>
+	<body>
+		<img src="./A.jpg" alt="" id="small" width="400px">
+		<div id="big">
+			<img src="./A.jpg" alt="">
+		</div>
+	</body>
+	<script>
+		//找大图对象
+		var big = document.getElementById('big');
+		//找小图对象
+		var small = document.getElementById('small');
+
+		small.onmousemove = function(e){
+			var e = e || event;
+			//获取鼠标在小图上的位置
+			document.title = "X:"+e.clientX+"Y:"+e.clientY;
+			//获取响应大图的内容
+			//将大图的滚动条的位置调整到小图的坐标的4倍的位置
+			big.scrollLeft = e.clientX * 4 - 500;
+			big.scrollTop = e.clientY * 4 - 300;
+
+		}
+
+		small.onmouseout = function(){
+			big.style.display = "none";
+		}
+	</script>
+</html>

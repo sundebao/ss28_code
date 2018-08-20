@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			#box{width:100px;height:100px;background-color:pink;}
+		</style>
+	</head>
+	<body>
+		<div id="box" style="width:200px"></div>
+	</body>
+	<script>
+		var box = document.getElementById('box');
+		// alert(box.style.width);
+		
+		// 获取计算后样式 标准浏览器获取
+		var css = document.defaultView.getComputedStyle(box);
+		alert(css.height);
+
+		//IE支持的获取的方式
+		var css = box.currentStyle;
+		alert(css.height);
+
+		//根据不同的浏览器进行计算样式后获取
+		if(box.currentStyle){
+			//IE支持浏览器
+			var css = box.currentStyle;
+		}else{
+			//标准浏览器
+			var css = document.defaultView.getComputedStyle(box);
+		}
+		alert(css.backgroundColor);
+
+	</script>
+</html>

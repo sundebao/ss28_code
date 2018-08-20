@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			*{margin:0px;padding:0px;}
+			#left{position:fixed;left:20px;top:200px;width:30px;height:30px;}
+			#right{position:fixed;left:560px;top:200px;width:30px;height:30px;}
+			.div1{width:20px;height:20px;position:fixed;left:100px;top:350px;background: #DBDBDB;border-radius:20px;text-align:center;line-height:20px;}
+		</style>
+	</head>
+	<body>
+		<div id="left" onclick="func('-')">
+			<img src="./image/left.jpg" alt="" width="20px">
+		</div>
+
+		<img src="./image/aa.jpg" alt="" name="list" style="display:block;width:600px;height:400px">
+		<img src="./image/bb.jpg" alt="" name="list" style="display:none;width:600px;height:400px">
+		<img src="./image/cc.jpg" alt="" name="list" style="display:none;width:600px;height:400px">
+		<img src="./image/dd.jpg" alt="" name="list" style="display:none;width:600px;height:400px">
+		<img src="./image/ee.jpg" alt="" name="list" style="display:none;width:600px;height:400px">
+		<img src="./image/ff.jpg" alt="" name="list" style="display:none;width:600px;height:400px">
+
+		<div id="right" onclick="func('+')">
+			<img src="./image/right.jpg" alt="" width="20px">
+		</div>
+
+
+		<div class="div1" style="background:pink;" name="list1" onmouseover="demo(0)" onmouseout="demo1(0)"></div>
+		<div class="div1" name="list1" onmouseover="demo(1)" onmouseout="demo1(1)"></div>
+		<div class="div1" name="list1" onmouseover="demo(2)" onmouseout="demo1(2)"></div>
+		<div class="div1" name="list1" onmouseover="demo(3)" onmouseout="demo1(3)"></div>
+		<div class="div1" name="list1" onmouseover="demo(4)" onmouseout="demo1(4)"></div>
+		<div class="div1" name="list1" onmouseover="demo(5)" onmouseout="demo1(5)"></div>
+
+	</body>
+	<script>
+		var lists = document.getElementsByName('list');
+		var list1 = document.getElementsByName('list1');
+		
+		console.log(lists);
+		var timmer;
+		var m = 0;
+		var x = 100;
+
+		//使用循环的方式将数字在图片下的按钮中写出来
+		for(var i=0;i<list1.length;i++){
+			//让你每个数字按钮的间隔变为50像素
+			list1[i].style.left = x+'px';
+			list1[i].innerHTML = i+1;
+			x += 50;
+		}
+		//鼠标移入
+		function demo(a){
+			//清除定时器
+			clearInterval(timmer);
+			for(var i=0;i<list1.length;i++){
+				if(a == i){
+					//把图片a对应的图片显示出来
+					lists[a].style.display = 'block';
+					//让选中的数字按钮变个背景颜色pink
+					list1[i].style.backgroundColor = 'pink';
+				}else{
+					//让不是a的这个图片隐藏
+					lists[i].style.display = 'none';
+					//让你的数字按钮也顺着没有被选中的图片颜色变为#DBDBDB
+					list1[i].style.backgroundColor = '#DBDBDB';
+				}
+			}
+		}
+
+		//鼠标移出
+		function demo1(b){
+			//将移除的图片序列放置在m中
+			m=--b;
+			//运行图片进行运动
+			running();
+			//恢复定时器
+			timmer=setInterval(running,3000);
+		}
+
+
+		//让图片显示出来
+		function show(m){
+			// alert(m);
+			for(var i=0;i<lists.length;i++){
+				if(i == m){
+					//让图片显示
+					lists[i].style.display = 'block';
+					//让选中的数字按钮变个背景颜色pink
+					list1[i].style.backgroundColor="pink";
+				}else{
+					//让不是我们想要的图片隐藏
+					lists[i].style.display = 'none';
+					list1[i].style.backgroundColor = '#DBDBDB'
+				}
+			}
+		}
+		// show(4);
+		// 让图片动起来
+		function running(){
+			m++;
+			if(m>=lists.length){
+				m=0;
+			}
+			show(m);
+		}
+
+		//让轮播图的左右按钮实现功能
+		function func(b){
+			// alert(b);
+			//清除定时器
+			clearInterval(timmer);
+			switch(b){
+				case '-':
+					m = m-2;
+					if(m<-1){
+						m=(lists.length-2);
+					}
+					break;
+				case '+':
+					break;
+			}
+			//让图片运动起来
+			running();
+			//调用定时器
+			timmer = setInterval(running,3000);
+		}
+
+		//调用定时器
+		timmer = setInterval(running,3000);
+	</script>
+</html>

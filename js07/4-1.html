@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			*{margin:0px;padding:0px;}
+			#box{
+				width: 200px;
+				height: 150px;
+				margin: 17px;
+				padding-left: 12px;
+				padding-right: 13px;
+				border: 20px solid green;
+				position: absolute;
+				left: 134px;
+				top: 57px;
+				overflow: scroll;
+			}
+			#son{width:10000px;height:10000px;}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="son"></div>
+		</div>
+	</body>
+	<script>
+		var box = document.getElementById('box');
+
+		// alert(box.offsetWidth);//外边框的宽的距离
+		// alert(box.offsetHeight);//外边框高的距离
+		// akert(box.offsetLeft);//外边框距离左侧的距离
+		// akert(box.offsetTop);//外边框距离顶部的距离
+		
+		// alert(box.clientWidth);//内边框之间的宽的距离
+		// alert(box.clientHeight);//内边框之间的高的距离
+		// alert(box.clientLeft);//内边框左侧距离外边框的距离
+		alert(box.clientTop);//内边框顶部距离外边框的距离
+		
+		// alert(box.scrollWidth);//内边框到滚动条之间宽的距离
+		// alert(box.scrollHeight);//内边框到滚动条之间高的距离
+		
+
+		box.scrollLeft = 7000;
+		box.scrollTop = 3000;
+		alert(box.scrollLeft);
+		alert(box.scrollTop);
+	</script>
+</html>
