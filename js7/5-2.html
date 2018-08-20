@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		*{margin:0px;padding:0px;}
+		#big{width:200px;height:200px;position:absolute;left:520px;top:10px;overflow:hidden;display:none;}
+	</style>
+</head>
+<body>
+  <img src="./2.jpg" alt="" id="small" width="400px">
+	<div id="big">
+		<img src="./2.jpg" alt="">
+	</div>
+</body>
+ <script type="text/javascript">
+ 
+ 	// 大图对象
+ 	var big = document.getElementById('big')
+ 	// 小图对象
+ 	var small = document.getElementById('small');
+ 	small.onmousemove = function(e){
+      // 获取小图上鼠标位置
+      var e = e || event;
+      document.title = 'X:'+e.clientX+'Y:'+e.clientY;
+      // 获取相应大图的内容
+      // 将大图的滚动条的位置调整到小图的坐标的4倍位置
+      big.scrollLeft = e.clientX*4-100;
+      big.scrollTop = e.clientY*4-100;
+      // 让对应的大图显示
+      big.style.display = 'block';
+ 	}
+ 	small.onmouseout = function(){
+ 		// 鼠标移除之后让大图隐藏
+ 		big.style.display = 'none'
+ 	}
+ </script>
+</html>

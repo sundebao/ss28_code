@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>事件冒泡</title>
+	 <style type="text/css">
+	 	#parent{
+	 		width: 400px;
+	 		height: 400px;
+	 		background: red;
+	 	}
+	 	#son{
+	 		width: 200px;
+	 		height: 200px;
+	 		background: yellow;
+	 	}
+	 </style>
+</head>
+<body>
+   <div id="parent">
+   	 <div id="son"></div>
+   </div>
+</body>
+ <script type="text/javascript">
+ 	var parent = document.getElementById('parent')
+ 	var son = document.getElementById('son');
+ 	son.onclick = function(e){
+ 		alert('点击了小的');
+ 		var e = e || event;
+ 		 // 取消冒泡
+ 		e.cancelBubble = true
+ 	}
+ 	parent.onclick = function(){
+ 		alert('点击了大的')
+ 	}
+ </script>
+</html>

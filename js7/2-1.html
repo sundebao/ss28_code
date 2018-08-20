@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>二级联动</title>
+</head>
+<body>
+  <select onchange="func(this)">
+  	<option value="">--请选择--</option>
+  	<option value="0">浙江</option>
+  	<option value="1">广东</option>
+  	
+  	<option value="3">河南</option>
+  </select>
+   <select id="cid">
+   	 <option value="">--请选择--</option>
+   </select>
+</body>
+ <script type="text/javascript">
+ 	function func(obj){
+ 		var cid = document.getElementById('cid');
+ 		value = obj.value;
+ 		city = [];
+ 		city[0] = ['宁波','杭州','温州'];
+ 		city [1] = ['广州','东莞','深圳','潮州'];
+ 		city[2] = ['郑州','商丘','开封'];
+ 		// 固定长度,清除原来的长度
+ 		cid.length = 0;
+ 		// 创建option标签
+ 		for(var i = 0;i<city[value].length;i++){
+ 			op = new Option(city[value][i],i);
+ 			cid.add(op)
+ 		}
+
+ 	}
+ </script>
+</html>

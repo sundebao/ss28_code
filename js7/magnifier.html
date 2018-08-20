@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>magnifier</title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding:0px;
+            list-style:none;
+        }
+        .small{
+            width:400px;
+            height:400px;
+            position:absolute;
+            left:100px;
+            top:50px;
+        }
+        .big{
+            width:400px;
+            height:400px;
+            position: absolute;
+            left:510px;
+            top:50px;
+             overflow: hidden; 
+            display: none;
+        }
+        ul{
+            position: absolute;
+            top:460px;
+            left:100px;
+        }
+        ul li {
+            width:80px;
+            height:80px;
+            float:left;
+            margin-right: 5px;
+            border: 1px blue dashed;
+        }
+        .move{
+            width:100px;
+            height:100px;
+            background:url(./images/bg.png);
+            position: absolute;
+            top:0px;
+            left:0px;
+            display:none;
+        }
+        .bimg{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="small">
+        <img class="simg" src="./1.jpg" alt="" width="100%">
+        <div class="move"></div>
+    </div>
+    <div class="big">
+        <img class="bimg" src="./1.jpg" alt="">
+    </div>
+    <ul>
+        <li><img src="./images/1.jpg" alt="" width="100%"></li>
+        <li><img src="./images/2.jpg" alt="" width="100%"></li>
+        <li><img src="./images/3.jpg" alt="" width="100%"></li>
+    </ul>
+</body>
+<script type="text/javascript">
+    var move = document.getElementsByClassName('move')[0];
+    var small = document.getElementsByClassName('small')[0];
+    var big = document.getElementsByClassName('big')[0];
+    var bimg = document.getElementsByClassName('bimg')[0];
+    var simg = document.getElementsByClassName('simg')[0];
+    var ul = document.getElementsByTagName('ul')[0];
+    var imgs = ul.getElementsByTagName('img');
+    small.onmousemove = function (e){
+        //显示右边
+        big.style.display = 'block';
+        move.style.display = 'block';
+        var e = e || event;
+        document.title = 'X:' + e.clientX + 'Y:'+ e.clientY;
+
+        //获取鼠标x 和 y 赋值给move
+        var x = e.clientX;
+        var y = e.clientY;
+
+        var xx = x - small.offsetLeft - move.offsetWidth/2;
+        var yy = y - small.offsetTop - move.offsetHeight/2;
+        //判断越界
+        if(xx < 0){
+            xx = 0;
+        }
+        var maxLeft = small.offsetWidth - move.offsetWidth;
+        if(xx > maxLeft){
+            xx = maxLeft;
+        }
+
+        if(yy < 0){
+            yy = 0;
+        }
+        var maxTop = small.offsetHeight - move.offsetHeight;
+        if(yy > maxTop){
+            yy = maxTop;
+        }
+        move.style.left = xx + 'px';
+        move.style.top = yy + 'px';
+
+        //获取移动的比例
+        var xp = xx / small.offsetWidth;
+        var yp = yy / small.offsetHeight;
+
+        var bw = xp * bimg.offsetWidth;
+        var bh = yp * bimg.offsetHeight;
+
+        console.log(bw);
+        console.log(bh);
+        //移动
+        bimg.style.left = -bw +'px';
+        bimg.style.top = -bh + 'px';
+
+        //修改move的大小
+        var mx = big.offsetWidth / bimg.offsetWidth;
+        var my = big.offsetHeight / bimg.offsetHeight;
+
+        var moveX = mx * small.offsetWidth;
+        var moveY = my * small.offsetHeight;
+        move.style.width = moveX + 'px';
+        move.style.height = moveY + 'px';
+    }
+    small.onmouseout =function(){
+        big.style.display = 'none';
+        move.style.display = 'none';
+    }
+
+    for(var i = 0;i < imgs.length;i++){
+        imgs[i].onclick =function(){
+            var src = this.getAttribute('src');
+            simg.src= src;
+            bimg.src= src;
+        }
+    }
+
+</script>
+</html>

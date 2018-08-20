@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>获取计算后的样式</title>
+	<style type="text/css">
+		#box{width: 300px;height: 200px;background-color: blue}
+	</style>
+</head>
+<body>
+   <div id="box" style="width: 200px"></div>
+</body>
+ <script type="text/javascript">
+ 	var box = document.getElementById('box');
+ 	 // 获取计算后的样式
+ 	 // var css = document.defaultView.getComputedStyle('box');
+ 	 // alert(css.height);
+ 	 if (box.currentStyle) {
+ 	 	// IE浏览器
+ 	 	var css = box.currentStyle;
+ 	 }else{
+ 	 	// 标准浏览器
+ 	 	var css = document.defaultView.getComputedStyle(box);
+ 	 }
+ 	 alert(css.backgroundColor);
+ </script>
+</html>

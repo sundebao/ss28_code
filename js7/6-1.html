@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+   <img src="./images/11.jpg" name="list" style="display: block">
+   <img src="./images/22.jpg" name="list" style="display: none;">
+   <img src="./images/33.jpg" name="list" style="display: none">
+   <img src="./images/44.jpg" name="list" style="display: none">
+   <img src="./images/55.jpg" name="list" style="display: none">
+</body>
+ <script type="text/javascript">
+ 	var lists = document.getElementsByName('list')
+ 	var m=0;
+ 	// console.log(lists);
+   function show(m){
+   	  for(var i = 0;i<lists.length;i++){
+   	  	if(i==m){
+           lists[i].style.display='block';
+   	  	}else{
+           lists[i].style.display='none';
+   	  	}
+   	  }
+   }
+   function running(){
+      m++;
+      if(m>=lists.length){
+      	m=0;
+      }
+      show(m);
+   }
+   // show(2)
+   setInterval(running,1000)
+ </script>
+</html>
